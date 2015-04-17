@@ -1,0 +1,213 @@
+
+    <div id="wrap">
+        <div class="container" id="page-main">
+            <div class="row">
+                <div class='col-md-8 col-lg-8 col-sm-8'>
+                    <div class='box' id='topics_index'>
+                        <div align='left' class='cell'>
+                            <div class='pull-right'>
+                                <a class="btn btn-success btn-sm btn-new-topic" href="/topics/new_from_home.htm">创建新话题</a>
+                            </div>
+                            <div class='welcome'>
+                                <strong>linhuaqian-零花钱社区</strong>
+                            </div>
+                        </div>
+                   #if($!{pagination})
+					#set($dataList=$!{pagination.dataList})
+					#if($dataList && ${dataList.size()} > 0)
+						#foreach($!data in $dataList)
+                        <div class='cell topic'>
+                            <div class='avatar pull-left'>
+                                <a class="profile_link" href="/member/$!{data.userId}" title="$!{data.nickName}">
+                                    <img alt="$!{data.nickName} medium avatar" class="medium_avatar image_avatar" src="$!{data.avatar}" />
+                                </a>
+                            </div>
+                            <div class='item_title'>
+                                <div class='pull-right'>
+                                    <div class='badge badge-info'>$!{data.commentsCount}</div>
+                                </div>
+                                <h2 class='topic_title'>
+                                    <a class="rabel topic" href="/topics/$!{data.id}.htm">$!{data.title}</a>
+                                </h2>
+                                <div class='topic-meta'>
+                                    <a class="node" href="/nodes/$!{data.nodeId}.htm">$!{data.nodeName}</a>
+                                    <span class='muted'>•</span>
+                                    <a class="dark rabel profile_link" href="/member/$!{data.nickName}.htm" title="who">$!{data.nickName}</a>
+                                    <span class='muted'>•</span>
+                                    $!{data.getLastRepliedAtText()}
+									#if($!{data.lastRepliedBy})
+                                    <span class='muted'>•</span>
+                                    最后回复来自
+                                    <a class="rabel profile_link" href="/member/$!{data.lastRepliedBy}.htm" title="vbinv">$!{data.lastRepliedBy}</a>
+									#end
+									</div>
+                            </div>
+                        </div>
+						#end
+					#end
+					
+					#if($!{pagination.total} > 1)
+                        <div class='inner'>
+                            <span class='chevron'>»</span>
+                            <a class="rabel" href="/topics/list.htm?p=2">更多新主题</a>
+                        </div>
+					#end
+					#end	
+                    </div>
+                    <div class='box fix_cell' id='planes'>
+                        <div class='box-header'>
+                            <Strong>linhuaqian 官方论坛</Strong>
+                            / 节点导航
+                        </div>
+						#if($!noChildParentNodeList && $!{noChildParentNodeList.size()} > 0)
+						 <div class='cell'>
+                            <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                                <tr>
+                                    <td align='right' width='100'>
+											生活
+                                    </td>
+                                    <td style='line-height: 200%; padding-left: 15px;'>
+										#foreach($node in $noChildParentNodeList)
+                                        <a class="rabel item_node node_rabel" href="/nodes/${node.id}.htm">${node.name}</a>
+										#end
+									</td>
+                                </tr>
+						
+                            </table>
+                         </div>
+						#end
+						
+						#if($!nodeList && $!{nodeList.size()} > 0)
+							#foreach($!node in $!nodeList)
+								#set($parent=$!{node.parent})
+								#set($childList=$!{node.childNodelist})
+								#if(!$!node.hasNoChildList())
+                                <div class='cell'>
+                                    <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                                        <tr>
+                                            <td align='right' width='100'>
+													$parent.name
+                                            </td>
+                                            <td style='line-height: 200%; padding-left: 15px;'>
+												#foreach($child in $childList)
+                                                <a class="rabel item_node node_rabel" href="/nodes/${child.id}.htm">${child.name}</a>
+												#end
+											</td>
+                                        </tr>
+								
+                                    </table>
+                                </div>
+								#end
+						#end
+						#end
+                    </div>
+                </div>
+                <div class='col-md-4 col-lg-4 col-sm-4' id='Rightbar'>
+					
+					#if($webUser.isLogin())
+                    <div class='box'>
+                        <div class='cell'>
+                            <table>
+                                <tr>
+                                    <td valign='top' width='48'>
+                                        <a class="profile_link" href="/member/${webUser.nickname}.htm" title="${webUser.nickname}">
+                                            <img alt=" medium avatar" class="medium_avatar" src="${webUser.avatar}" />
+                                        </a>
+                                    </td>
+                                    <td valign='top' width='10'></td>
+                                    <td valign='left' width='auto'>
+                                        <div class='profile-link'>
+                                            <a class="rabel profile_link" href="/member/${webUser.nickname}.htm" title="${webUser.nickname}">${webUser.nickname}</a>
+                                        </div>
+                                        <div class='signature'></div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class='sep10'></div>
+                            <table width='100%'>
+                                <tr>
+                                    <td align='center' class='with_separator' width='34%'>
+                                        <a class="dark" href="javascript:void(0)" style="display: block;">
+                                            <span class='bigger'>0</span>
+                                            <div class='sep3'></div>
+                                            <span class='gray'>话题收藏</span>
+                                        </a>
+                                    </td>
+                                    <td align='center' width='33%'>
+                                        <a class="dark" href="javascript:void(0)" style="display: block;">
+                                            <span class='bigger'>0</span>
+                                            <div class='sep3'></div>
+                                            <span class='gray'>特别关注</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='cell'>
+                            <div class='muted'>
+                                <a class='btn btn-sm btn-info btn-block' href='/users/settings.htm#avatar'>立刻上传个性头像</a>
+                            </div>
+                        </div>
+                        <div class='inner muted'>
+                            暂无提醒
+                        </div>
+                    </div>
+					
+					#else
+					<div class="box">
+                        <div class="cell">
+                        零花钱社区 — 让论坛回归交流本质
+                        </div>
+                        <div class="inner">
+                        <div class="sep5"></div>
+                        <div class="center">
+                        <a class="btn btn-small" href="/users/sign_up.htm">现在注册</a>
+                        <div class="sep5"></div>
+                        <div class="sep10"></div>
+                        已注册用户请
+                        <a class="rabel" href="/users/sign_in.htm">登入</a>
+                        </div>
+                        </div>
+                    </div>
+					#end
+					#**
+                    <div class='box'>
+                        <div class='box-header'>
+                            社区运行状态
+                        </div>
+                        <div class='inner'>
+                            <table class='table table-striped'>
+                                <tr>
+                                    <td>
+                                        <span class='gray'>注册会员</span>
+                                    </td>
+                                    <td>
+                                        <strong>2096</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class='gray'>话题</span>
+                                    </td>
+                                    <td>
+                                        <strong>386</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class='gray'>回复</span>
+                                    </td>
+                                    <td>
+                                        <strong>1884</strong>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+					*#
+                </div>
+            </div>
+        </div>
+    </div>
+
+

@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content='linhuaqian.com 零花钱社区 让论坛回归交流本质！技术先进，管理方便，深度定制。 不喜欢传统论坛？试试 ！' name='description'>
+<meta charset='UTF-8'>
+<meta content='True' name='HandheldFriendly'>
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+	<meta name="baidu-site-verification" content="4URh1t5tA0" />
+	#if($!headTitle)
+<title> $!headTitle</title>
+#else
+	<title> linhuaqian - 零花钱社区 - 让论坛回归交流本质</title>
+#end
+<meta name="google-site-verification" content="7Vt_xZdfijvwgNWW7Qgsugv1iZq_8FVfgcsTCSi06MQ" />
+<link href="/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+<link href="/topics.atom" rel="alternate" title="ATOM" type="application/atom+xml" />
+<link href='http://rabelapp.com/' rel='canonical'>
+<meta content="authenticity_token" name="csrf-param" />
+<meta content="VnogTHiDdOlJ5CwhFK806WgRBSiUIXBnODBEtOLaM/M=" name="csrf-token" />
+<link data-turbolinks-track="true" href="/static/css/application.css" media="all" rel="stylesheet" /><link href="/static/css/i_theme.css" media="screen" rel="stylesheet" /><style type="text/css">.topics_heading { text-align: center; color: #999; }
+</style>
+<script data-turbolinks-track="true" src="/static/js/application.js"></script>
+<script src="/static/js/ajaxfileupload.js"></script>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" />
+<style type="text/css">
+.image_avatar{
+    width: 52px;
+    height: 52px;
+    border-radius: 25px;
+}
+</style>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1db59f997570ce0b22ecf16c9f2fadb2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+
+<body id="rabel">
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-target="#navbar-collapse" data-toggle="collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">linhuaqian - 零花钱社区</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input class="form-control" data-domain="rabelapp.com" id="q" maxlength="40" name="q" placeholder="搜索话题" type="text" />
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="">
+                        <a href="/">首页</a>
+                    </li>
+                    #if($webUser.isLogin())
+                        <li class="">
+                            <a href="/member/$!{webUser.nickname}.htm">$!{webUser.nickname}</a>
+                        </li>
+                        <li class="">
+                            <a href="/users/settings.htm">个人设置</a>
+                        </li>
+                        <li>
+                            <a data-method="delete" href="/users/sign_out.htm" rel="nofollow">退出</a>
+                        </li>
+                        #else
+                            <li class="">
+                                <a href="/users/sign_up.htm">注册</a>
+                            </li>
+                            <li class="">
+                                <a href="/users/sign_in.htm">登入</a>
+                            </li>
+                    #end
+                </ul>
+            </div>
+        </div>
+    </div>
+	
+	$screen_content
+	#**
+	<div id='footer'>
+        <div class='container' id='footer-main'>
+            <strong class='page-links'>
+                <a class="dark" href="/page/about">Rabel 简介</a>
+                &nbsp;
+                <span class='snow'>·</span>
+                &nbsp;
+                <a class="dark" href="/page/support">技术支持</a>
+                &nbsp;
+                <span class='snow'>·</span>
+                &nbsp;
+                <a class="dark" href="/page/installation">安装文档</a>
+                &nbsp;
+                <span class='snow'>·</span>
+                &nbsp;
+                <a class="dark" href="/page/showcase">案例介绍</a>
+                &nbsp;
+                <span class='snow'>·</span>
+                &nbsp;
+                <a class="dark" href="/page/contact">联系方式</a>
+                &nbsp;
+                <span class='snow'>·</span>
+                &nbsp;
+                <a class="dark" href="/page/license">授权协议</a>
+                &nbsp;
+                <span class='snow'>·</span>
+                &nbsp;
+                <a class="dark" href="/page/donation">赞助开发</a>
+                &nbsp;
+                <span class='snow'>·</span>
+                &nbsp;
+                <a class="dark" href="/page/versions">版本历史</a>
+                &nbsp;
+                <span class='snow'>·</span>
+                &nbsp;
+                <a class="dark" href="/sitemap.xml">Sitemap</a>
+            </strong>
+            <div class='copywrite'>
+            </div>
+        </div>
+    </div>
+*#
+</body>
+
+ #** <script type='text/javascript'>
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-12942904-6']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <script>
+        window.rabel = {
+        search_engine_url: "http://www.google.com.hk/search?q=",
+        version: "1.5.4.6"
+        };
+        jQuery(function($) {
+        });
+	</script>*#
+</html>

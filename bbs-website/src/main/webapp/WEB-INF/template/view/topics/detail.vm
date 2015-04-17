@@ -1,0 +1,240 @@
+
+    <div id="wrap">
+        <div class="container" id="page-main">
+            <div class="row">
+                <div class='col-md-8 col-lg-8 col-sm-8'>
+                    <div class='box'>
+                        <article>
+                            <div class='header'>
+                                <div class='pull-right'>
+                                    <a class="profile_link" href="/member/$!{user.nickname}.htm" title="$!{user.nickname}">
+                                        <img alt="nbspjj large avatar" class="large_avatar" src="$!{user.avatar}" />
+                                    </a>
+                                </div>
+                                <a class="rabel" href="/">linhuaqian-零花钱社区</a>
+                                <span class="chevron">&nbsp;›&nbsp;</span>
+								#if($!{node.parent})
+								<a class="rabel" href="javascript:void(0)" style="text-decoration:none">$!{node.parent.name}</a>
+								<span class="chevron">&nbsp;›&nbsp;</span>
+								#end
+                                <a class="rabel" href="/nodes/${node.id}.htm">$!{node.name}</a>
+                                <div class='sep10'></div>
+                                <h1 id='topic_title'>
+                                    $!{topic.title}
+                                </h1>
+                                <small class='topic-meta'>
+                                    By
+                                    <a class="dark rabel profile_link" href="/member/$!{user.nickname}.htm" title="$!{user.nickname}">$!{user.nickname}</a>
+                                    at
+                                    $!{topic.getCreateAtText()}
+                                    ,
+                                    $!{topic.browseNum}
+                                    次浏览
+                                </small>
+                                <div class='clearfix'></div>
+                            </div>
+                            <div class='inner'>
+                                <div class='content topic_content'>
+                                    <pre>$!{topic.content}</pre>
+                                </div>
+								
+                                <div class='pull-right'>
+									#**
+                                    <a class="btn btn-xs btn-info bookmark" data-method="post" href="/topics/527/bookmarks" rel="nofollow">加入收藏</a>
+                                *#											
+								<!-- JiaThis Button BEGIN -->
+                            <div class="jiathis_style">
+                            	<a class="jiathis_button_qzone"></a>
+                            	<a class="jiathis_button_tsina"></a>
+                            	<a class="jiathis_button_tqq"></a>
+                            	<a class="jiathis_button_weixin"></a>
+                            	<a class="jiathis_button_renren"></a>
+                            	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                            	<a class="jiathis_counter_style"></a>
+                            </div>
+                     <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1419065354417849" charset="utf-8"></script>
+	                       <!-- JiaThis Button END -->
+								
+								</div>
+								
+
+                                <div class='clearfix'></div>
+								
+
+                          
+                            </div>
+							#**
+                            <div class='inner'>
+                                <div class='pull-right'>
+                                    <a class="rabel" href="/t/528" rel="prev">呵呵</a>
+                                    <span class='guillemet right-guillemet'>»</span>
+                                </div>
+                                <div class='pull-left'>
+                                    <span class='guillemet left-guillemet'>«</span>
+                                    <a class="rabel" href="/t/512" rel="next">发个图看看</a>
+                                </div>
+                                <div class='clearfix'></div>
+                            </div>
+							*#
+                        </article>
+                    </div>
+				#if($!commentList && $!{commentList.size()} > 0)
+                    <section>
+                        <div class='box'>
+                            <div class='box-header'>
+                                <div class='fr'>
+                                    ⬇
+                                    <a class="dark jump_to_comment" href="javascript:void(0);">跳到回复</a>
+                                </div>
+                                ${topic.commentsCount} 回复
+                            </div>
+                            <div class='fix_cell' id='replies'>
+								#foreach($!comment in $!commentList)
+                                <article>
+                                    <div class='cell hoverable reply' id='comment_2217'>
+                                        <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                                            <tr>
+                                                <td valign='top' width='48'>
+                                                    <a class="profile_link" href="/member/$!{comment.nickname}.htm" title="$!{comment.nickname}">
+                                                        <img alt=" medium avatar" class="medium_avatar" src="$!{comment.avatar}" />
+                                                    </a>
+                                                </td>
+                                                <td width='10'></td>
+                                                <td valign='top' width='auto'>
+                                                    <div class='fr'>
+                                                        <small class='snow'>
+                                                            #$velocityCount -
+                                                            $!{comment.getCreateDateText()}
+                                                            <img align="absmiddle" alt="Reply button" border="0" class="clickable mention_button" data-mention="@$!{comment.nickname}" src="/static/img/reply_button.png" />
+                                                        </small>
+                                                    </div>
+                                                    <a class="dark rabel profile_link" href="/member/$!{comment.nickname}.htm" title="$!{comment.nickname}">$!{comment.nickname}</a>
+                                                    <div class='sep5'></div>
+                                                    <div class='content reply_content'>
+                                                        <p>
+															#if($!{comment.postingDevice})
+																@<a class="rabel" href="/member/$!{comment.postingDevice}.htm">$!{comment.postingDevice}</a>
+															#end
+                                                            $!{comment.content}
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </article>
+								#end
+                            </div>
+                            <div class='center'>
+                            </div>
+                        </div>
+                    </section>
+				#else
+					<div class="glass">
+						<div class="inner center">
+							目前尚无回复
+						</div>
+					</div>
+				#end
+				#if($webUser.isLogin())
+                    <form accept-charset="UTF-8" action="/topics/$!{topic.id}/comments.htm" class="new_comment" id="new_comment" method="post">
+                        <div style="display:none">
+                            <input name="utf8" type="hidden" value="&#x2713;" />
+                            <input name="authenticity_token" type="hidden" value="xmEKEMd70onb7c1Da0P/pBi5SITfO1/EVJOUxqUgPFg=" />
+                        </div>
+                        <div class='box'>
+                            <div class='box-header'>
+                                <div class='fr'>
+                                    ⬆
+                                    <a class="dark back_to_top" href="javascript:void(0);">回到顶部</a>
+                                </div>
+                                现在就添加一条回复
+                            </div>
+                            <div class='inner'>
+                                <div id='preview-widget'>
+                                    <a class="action_label cancel_preview current_label" data-ref="comment_content" href="javascript:void(0);">编辑</a>
+                                    <div id='preview'></div>
+                                </div>
+                                <textarea id="comment_content" name="content" rows="5" style="width: 98%;"></textarea>
+                                <div class='sep10'></div>
+                                <input class="btn btn-sm btn-success" data-disable-with="正在提交" name="commit" type="submit" value="发送" />
+                                <small class='gray'>支持 Ctrl + Enter 快捷键</small>
+                            </div>
+                        </div>
+                    </form>
+					#end
+                </div>
+                <div class='col-md-4 col-lg-4 col-sm-4' id='Rightbar'>
+					
+					#if($webUser.isLogin())
+                    <div class='box'>
+                        <div class='cell'>
+                            <table>
+                                <tr>
+                                    <td valign='top' width='48'>
+                                        <a class="profile_link" href="/member/${webUser.nickname}.htm" title="${webUser.nickname}">
+                                            <img alt=" medium avatar" class="medium_avatar" src="${webUser.avatar}" />
+                                        </a>
+                                    </td>
+                                    <td valign='top' width='10'></td>
+                                    <td valign='left' width='auto'>
+                                        <div class='profile-link'>
+                                            <a class="rabel profile_link" href="/member/${webUser.nickname}.htm" title="${webUser.nickname}">${webUser.nickname}</a>
+                                        </div>
+                                        <div class='signature'></div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class='sep10'></div>
+                            <table width='100%'>
+                                <tr>
+                                    <td align='center' class='with_separator' width='34%'>
+                                        <a class="dark" href="javascript:void(0)" style="display: block;">
+                                            <span class='bigger'>0</span>
+                                            <div class='sep3'></div>
+                                            <span class='gray'>话题收藏</span>
+                                        </a>
+                                    </td>
+                                    <td align='center' width='33%'>
+                                        <a class="dark" href="javascript:void(0)" style="display: block;">
+                                            <span class='bigger'>0</span>
+                                            <div class='sep3'></div>
+                                            <span class='gray'>特别关注</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='cell'>
+                            <div class='muted'>
+                                <a class='btn btn-sm btn-info btn-block' href='/users/settings.htm#avatar'>立刻上传个性头像</a>
+                            </div>
+                        </div>
+                        <div class='inner muted'>
+                            暂无提醒
+                        </div>
+                    </div>
+					
+					#else
+					<div class="box">
+                        <div class="cell">
+                         零花钱社区 — 让论坛回归交流本质
+                        </div>
+                        <div class="inner">
+                        <div class="sep5"></div>
+                        <div class="center">
+                        <a class="btn btn-small" href="/users/sign_up.htm">现在注册</a>
+                        <div class="sep5"></div>
+                        <div class="sep10"></div>
+                        已注册用户请
+                        <a class="rabel" href="/users/sign_in.htm">登入</a>
+                        </div>
+                        </div>
+                    </div>
+					#end
+                </div>
+            </div>
+        </div>
+    </div>
+
+

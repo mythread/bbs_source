@@ -1,0 +1,42 @@
+
+    <div id="wrap">
+        <div class="container" id="page-main">
+            <div class="row">
+                <div class='col-md-8 col-lg-8 col-sm-8'>
+                    <div class='box'>
+                        <div class='cell'>
+                            <a class="rabel" href="/"> 零花钱社区</a>
+                            <span class="chevron">&nbsp;›&nbsp;</span>
+                            登出
+                        </div>
+                        <div class='inner'>
+                            你已经成功从 零花钱社区 退出。没有任何个人信息留在这台设备上。
+                            <div class='sep10'></div>
+                            <div class='sep5'></div>
+                            <a class="btn btn-small" href="/users/sign_in.htm">重新登入</a>
+                            <div class='sep5'></div>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-4 col-lg-4 col-sm-4' id='Rightbar'>
+                    <div class='box'>
+                        <div class='cell'>
+                            零花钱社区 — 让论坛回归交流本质
+                        </div>
+                        <div class='inner'>
+                            <div class='sep5'></div>
+                            <div class='center'>
+                                <a class="btn btn-small" href="/users/sign_up.htm">现在注册</a>
+                                <div class='sep5'></div>
+                                <div class='sep10'></div>
+                                已注册用户请
+                                <a class="rabel" href="/users/sign_in.htm">登入</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

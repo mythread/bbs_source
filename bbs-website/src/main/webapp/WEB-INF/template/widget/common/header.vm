@@ -1,0 +1,32 @@
+<div id="header">
+    <div id="header-div">
+        <div id="header-logo-div">
+            <a href="/">
+    			<img src="/static/img/logo.png" id="header-logo"/>
+    		</a>
+		</div>
+    	<ul>
+    		<li #if($navSelected == 1) class="header-selected" #end>
+                <a href="/">首&nbsp;&nbsp;&nbsp;&nbsp;页</a>
+            </li>
+    		<li #if($navSelected == 2) class="header-selected" #end>
+    			<a href="/product/terminal.htm">产品介绍</a>
+            </li>
+    		<li #if($navSelected == 3) class="header-selected" #end>
+    			<a href="/case/list.htm">案例分享</a>
+            </li>
+    		<li #if($navSelected == 4) class="header-selected" #end>
+    			<a href="/partner/list.htm">合作伙伴</a>
+            </li>
+    		<li #if($navSelected == 5) class="header-selected" #end>
+    			<a href="/platform.htm">商家平台</a>
+            </li>
+    		<li #if($navSelected == 6) class="header-selected" #end>
+    			<a href="/job/list.htm">人才招聘</a>
+            </li>
+    		<li #if($navSelected == 7) class="header-selected" #end>
+    			<a href="/about/introduce.htm">关于我们</a>
+            </li>
+        </ul>
+	</div>
+</div>

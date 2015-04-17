@@ -1,0 +1,57 @@
+
+    <div id="wrap">
+        <div class="container" id="page-main">
+            <div class="row">
+                <div class='col-md-8 col-lg-8 col-sm-8'>
+                    <div class='box'>
+                        <div class='cell'>
+                            <a class="rabel" href="/">linhuaqian-零花钱社区</a>
+                            <span class="chevron">&nbsp;›&nbsp;</span>
+                            登入</div>
+                            <div class='inner'>
+                                <form accept-charset="UTF-8" action="/users/save_sign_in.htm" class="simple_form new_user" id="new_user" method="post" novalidate="novalidate">
+                                    <div style="display:none">
+                                        <input name="utf8" type="hidden" value="&#x2713;" />
+                                        <input name="authenticity_token" type="hidden" value="ymm+bvUY2paUuELG74a2Bu5LY0TB04cOzScdPNeOPyg=" />
+                                    </div>
+                                    <div class="form-group string required user_nickname">
+                                        <label class="string required control-label" for="user_nickname">邮箱</label>
+                                        <input autofocus="autofocus" class="string required form-control" id="user_email" maxlength="32" name="email" size="32" type="text" />
+                                    </div>
+                                    <div class="form-group password optional user_password">
+                                        <label class="password optional control-label" for="user_password">密码</label>
+                                        <input class="password optional form-control" id="user_password" maxlength="100" name="password" size="100" type="password" />
+                                    </div>
+                                    <div class='form-actions'>
+                                        <input class="btn btn-small btn-primary" name="commit" type="submit" value="登入" />
+                                        <div class='additional'>
+                                            <div class='gray'>登录后 cookie 会被记住一年</div>
+                                            <!--<a href="/users/password/new">找回登录密码</a>-->
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                    </div>
+                </div>
+                <div class='col-md-4 col-lg-4 col-sm-4' id='Rightbar'>
+                    <div class='box'>
+                        <div class='cell'>
+                            零花钱社区 — 让论坛回归交流本质
+                        </div>
+                        <div class='inner'>
+                            <div class='sep5'></div>
+                            <div class='center'>
+                                <a class="btn btn-small" href="/users/sign_up.htm">现在注册</a>
+                                <div class='sep5'></div>
+                                <div class='sep10'></div>
+                                已注册用户请
+                                <a class="rabel" href="/users/sign_in.htm">登入</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

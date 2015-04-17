@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">  
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" >
+	<appender name="ALL_LOG" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"          
+                value="[%d{dd HH:mm:ss,SSS\} %-5p] [%t] %c{2\} - %m%n" />    
+		</layout>
+		 <filter class="org.apache.log4j.varia.LevelRangeFilter">       
+            <param name="levelMin" value="debug" />       
+            <param name="levelMax" value="error" />       
+            <param name="AcceptOnMatch" value="true" />       
+        </filter>   
+	</appender>	
+	
+	
+	 <logger name="com.bbs.mapper" additivity="true">
+		<level value="debug"></level>
+	</logger> 
+	
+	<root>
+	 	<!--<priority value="debug"></priority> -->
+		 <level value="info"></level> 
+		<appender-ref ref="ALL_LOG"/>
+	</root>
+	
+</log4j:configuration>

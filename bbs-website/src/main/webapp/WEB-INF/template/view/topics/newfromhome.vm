@@ -1,0 +1,172 @@
+
+    <div id="wrap">
+        <div class="container" id="page-main">
+            <div class="row">
+                <div class='col-md-8 col-lg-8 col-sm-8'>
+                    <div class="box">
+                        <div class="cell">
+                            <h2>创建新话题</h2>
+						</div>
+						#if($errorMsg)
+						<div class="cell">
+                            <h3 style="color:red">$errorMsg</h3>
+						</div>
+						#end
+                        <div class="inner">
+                            <form accept-charset="UTF-8" action="/topics/create_from_home.htm" class="simple_form new_topic" id="new_topic" method="post" novalidate="novalidate">
+                                <div style="display:none">
+                                    <input name="utf8" type="hidden" value="&#x2713;" />
+                                </div>
+                                <div class="form-group string required topic_title">
+                                    <label class="string required control-label" for="topic_title">标题</label>
+                                    <input class="string required form-control span6" id="topic_title" maxlength="150" name="title" size="150" type="text" />
+                                </div>
+								##图片上传
+								<div class="form-group string required " id="id_div_addphoto">
+									<input id="id_file" type="file" name="upload" />
+									<input id="id_submit" class="btn btn-primary btn-inverse"  value="添加图片" style=" width: 96px;height: 24px;margin-top: 10px;" />
+									##<input id="picUrlAndAliasName" type="hidden" value="" name="picUrlAndAliasName" />
+									##<input id="id_aliasName" type="hidden" name="aliasName" value="" />
+								</div>
+								
+                                <div id='preview-widget'>
+                                    <a class="action_label cancel_preview current_label" data-ref="topic_content" href="javascript:void(0);">编辑</a>
+                                    <div id='preview'></div>
+                                </div>
+                                <div class="form-group text optional topic_content">
+                                    <textarea class="text optional form-control" id="topic_content" name="content" placeholder="话题内容" rows="10" style="width: 98%;"></textarea>
+                                </div>
+                                <div class="form-group grouped_select required topic_node">
+                                    <select class="grouped_select required form-control" id="topic_node_id" name="nodeId">
+                                        <option value="">选择一个节点</option>
+										#foreach($nodeVO in $!nodeList)
+											#set($parent=${nodeVO.parent})
+											#set($childList=${nodeVO.childNodelist})
+											#if(${nodeVO.hasNoChildList()})
+												<option value="${parent.id}">${parent.name}</option>
+											#else
+                                                <optgroup label="${parent.name}">
+													#foreach($child in $childList)
+                                                    <option value="${child.id}">${child.name}</option>
+													#end
+        										</optgroup>
+											#end
+										#end
+									</select>
+								</div>
+                                <input class="btn btn-primary btn-inverse" data-disable-with="正在提交" name="commit" type="submit" value="创建新话题" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-4 col-lg-4 col-sm-4' id='Rightbar'>
+                  #if($webUser.isLogin())
+                    <div class='box'>
+                        <div class='cell'>
+                            <table>
+                                <tr>
+                                    <td valign='top' width='48'>
+                                        <a class="profile_link" href="/member/${webUser.nickname}.htm" title="${webUser.nickname}">
+                                            <img alt=" medium avatar" class="medium_avatar" src="${webUser.avatar}" />
+                                        </a>
+                                    </td>
+                                    <td valign='top' width='10'></td>
+                                    <td valign='left' width='auto'>
+                                        <div class='profile-link'>
+                                            <a class="rabel profile_link" href="/member/${webUser.nickname}.htm" title="${webUser.nickname}">${webUser.nickname}</a>
+                                        </div>
+                                        <div class='signature'></div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class='sep10'></div>
+                            <table width='100%'>
+                                <tr>
+                                    <td align='center' class='with_separator' width='34%'>
+                                        <a class="dark" href="javascript:void(0)" style="display: block;">
+                                            <span class='bigger'>0</span>
+                                            <div class='sep3'></div>
+                                            <span class='gray'>话题收藏</span>
+                                        </a>
+                                    </td>
+                                    <td align='center' width='33%'>
+                                        <a class="dark" href="javascript:void(0)" style="display: block;">
+                                            <span class='bigger'>0</span>
+                                            <div class='sep3'></div>
+                                            <span class='gray'>特别关注</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='cell'>
+                            <div class='muted'>
+                                <a class='btn btn-sm btn-info btn-block' href='/users/settings.htm#avatar'>立刻上传个性头像</a>
+                            </div>
+                        </div>
+                        <div class='inner muted'>
+                            暂无提醒
+                        </div>
+                    </div>
+					
+					#else
+					<div class="box">
+                        <div class="cell">
+                        零花钱社区 — 让论坛回归交流本质
+                        </div>
+                        <div class="inner">
+                        <div class="sep5"></div>
+                        <div class="center">
+                        <a class="btn btn-small" href="/users/sign_up.htm">现在注册</a>
+                        <div class="sep5"></div>
+                        <div class="sep10"></div>
+                        已注册用户请
+                        <a class="rabel" href="/users/sign_in.htm">登入</a>
+                        </div>
+                        </div>
+                    </div>
+					#end
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(function(){
+	var count = 0;
+	jQuery('#id_submit').click(function(){
+		var picUrl = '/topics/uploadPic.htm';
+		$.ajaxFileUpload({
+	        url:picUrl,  
+	        secureuri:false,                           
+	        fileElementId:'id_file',               
+	        dataType:'json',                            
+	        success:function(res, status){           
+	        	if(res.success) {
+					var data = res.data;
+	        		alert("上传成功");
+					var host = window.location.host;
+					var purl = "http://" + host + data;
+					++count;
+					var aliasName = "<图片" + count + ">";
+					var str = purl + "#" + aliasName;
+	        		//$('#id_picUrl').val(purl);
+					var html = '<input  type="hidden"  name="picUrlAndAliasName" value="'+str+'" />'
+					$('#id_div_addphoto').append(html);
+	        		//$('#id_div_addphoto').append(aliasName);
+					var topicVal = $('#topic_content').val();
+					$('#topic_content').val(topicVal+aliasName);
+	        	}else {
+	        		alert(res.msg);
+	        	}
+	        },  
+	        error:function(data, status, e){ 
+	        	alert("图片上传失败，请重试！");
+	        }  
+	    });
+	});
+	
+});
+</script>
+
+

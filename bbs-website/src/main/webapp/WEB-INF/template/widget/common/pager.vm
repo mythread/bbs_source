@@ -1,0 +1,35 @@
+#if($pagination)
+#if(${pagination.allPageNum} > 1)
+<div class="pager">
+	#set($prev=${pagination.prevPage})
+	#set($next=${pagination.nextPage})
+	#set($pageList=${pagination.pages})
+	#if(${pagination.nowPageIndex} == 0)
+        <span class="pager-none">${prev.text}</span>
+	#else
+        <a href="${prev.url}">${prev.text}</a>
+	#end
+	#if($pageList.size() < 5)
+		#foreach($p in $pageList)
+			 <a href="${p.url}" #if(${p.isCurrent()}) class="pager-selected" #end>${p.text}</a>
+		#end
+	#else
+		#foreach($index in [0..2])
+			#set($p=$pageList.get($index))
+			<a href="${p.url}" #if(${p.isCurrent()}) class="pager-selected" #end>${p.text}</a>
+		#end
+			<span class="pager-ellipsis">...</span>
+		#foreach($index in [3..4])
+			#set($p=$pageList.get($index))
+			<a href="${p.url}" #if(${p.isCurrent()}) class="pager-selected" #end>${p.text}</a>
+		#end	
+	#end
+	#set($lastPage=${pagination.allPageNum} - 1)
+	#if(${pagination.nowPageIndex} == $lastPage)
+		 <span class="pager-none">${next.text}</span>
+	#else
+		<a href="${next.url}">${next.text}</a>
+	#end
+</div>
+#end
+#end

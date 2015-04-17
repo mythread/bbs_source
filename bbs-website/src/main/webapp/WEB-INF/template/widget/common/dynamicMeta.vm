@@ -1,0 +1,7 @@
+#if($htmlMeta)
+<title>${htmlMeta.title}</title>
+<meta name="description" content="${htmlMeta.description}">
+<meta name="Keywords" content="${htmlMeta.keywords}">
+#else
+<title>容易网</title>
+#end

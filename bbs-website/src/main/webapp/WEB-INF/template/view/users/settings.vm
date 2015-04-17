@@ -1,0 +1,199 @@
+
+    <div id="wrap">
+        <div class="container" id="page-main">
+            <div class="row">
+                <div class='col-md-8 col-lg-8 col-sm-8'>
+					#if($!updateFlag == 1)
+						<p class="alert alert-success">更新成功</p>
+					#end	
+                    <div class='box'>
+                        <div class='cell'>
+                            <a class="rabel" href="/">linhuaqian-零花钱社区</a>
+                            <span class="chevron">&nbsp;›&nbsp;</span>
+                            设置
+                        </div>
+                        <div class='inner'>
+                            <form accept-charset="UTF-8" action="/users/update_account.htm" class="simple_form edit_user" id="edit_user_2318" method="post" novalidate="novalidate">
+                                <div style="display:none">
+                                    <input name="utf8" type="hidden" value="&#x2713;" />
+                                    <input name="_method" type="hidden" value="patch" />
+                                </div>
+                                <div class="form-group string required disabled user_nickname">
+                                    <label class="string required control-label" for="user_nickname">用户名</label>
+                                    <input class="string required disabled form-control" disabled="disabled" id="user_nickname" maxlength="12" name="user[nickname]" size="12" type="text" value="$!{webUser.nickname}" />
+                                </div>
+                                <div class="form-group email optional user_email">
+                                    <label class="email optional control-label" for="user_email">电子邮件</label>
+                                    <input class="string email optional form-control form-control" id="user_email" disabled="disabled"  maxlength="255" name="user[email]" size="255" type="email" value="$!{webUser.email}" />
+                                </div>
+                                <div class="form-group string optional user_account_personal_website">
+                                    <label class="string optional control-label" for="user_account_attributes_personal_website">个人网站</label>
+                                    <input class="string optional form-control" id="user_account_attributes_personal_website" maxlength="255" name="personalWebsite" size="255" type="text" value="$!{account.personalWebsite}" />
+                                </div>
+								#**
+							 	<div class="form-group string optional ">
+                                    <label class="string optional control-label" for="user_account_attributes_personal_website">支付账号</label>
+                                    <input class="string optional form-control" id="user_account_attributes_personal_website" maxlength="255" name="alipayAccount" size="128" type="text" value="" />
+                                </div>
+								*#
+                                <div class="form-group string optional user_account_location">
+                                    <label class="string optional control-label" for="user_account_attributes_location">所在地</label>
+                                    <input class="string optional form-control" id="user_account_attributes_location" maxlength="255" name="location" size="255" type="text" value="$!{account.location}" />
+                                </div>
+                                <div class="form-group string optional user_account_weibo_link">
+                                    <label class="string optional control-label" for="user_account_attributes_weibo_link">微博地址</label>
+                                    <input class="string optional form-control span4" id="user_account_attributes_weibo_link" maxlength="255" name="weiboLink" size="255" type="text" value="$!{account.weiboLink}" />
+                                </div>
+                                <div class="form-group string optional user_account_signature">
+                                    <label class="string optional control-label" for="user_account_attributes_signature">签名</label>
+                                    <input class="string optional form-control span4" id="user_account_attributes_signature" maxlength="20" name="signature" size="20" type="text" value="$!{account.signature}" />
+                                </div>
+                                <div class="form-group text optional user_account_introduction">
+                                    <label class="text optional control-label" for="user_account_attributes_introduction">个人简介</label>
+                                    <textarea class="text optional form-control span4" id="user_account_attributes_introduction" name="introduction" rows="5">$!{account.introduction}</textarea>
+                                </div>
+                                <input id="user_account_attributes_id" name="id" type="hidden" value="" />
+                                <div class='form-actions'>
+                                    <input class="btn btn-small btn-primary" name="commit" type="submit" value="保存设置" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <a name='avatar'>&nbsp;</a>
+                    <div class='box'>
+                        <div class='box-header'>
+                            头像
+                        </div>
+                        <form accept-charset="UTF-8" action="/users/update_avatar.htm" class="simple_form edit_user" enctype="multipart/form-data" id="edit_user_2318" method="post" novalidate="novalidate">
+                            <div style="display:none">
+                                <input name="utf8" type="hidden" value="&#x2713;" />
+                                <input name="_method" type="hidden" value="patch" />
+                            </div>
+                            <div class='cell'>
+                                <div class='control-group'>
+                                    <div class='control-label'>当前头像</div>
+                                    <div class='controls'>
+                                        <img  class="large_avatar" src="${webUser.avatar}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='inner'>
+                                <div class="form-group file optional user_avatar">
+                                    <label class="file optional control-label" for="user_avatar">选择图片文件</label>
+									#if($!errorMsg)
+										<label class="file optional control-label" style="color:red">$!errorMsg</label>
+									#end
+                                    <input class="file optional form-control" id="user_avatar" name="avatar" type="file" />
+                                </div>
+                                <div class='form-actions'>
+                                    <input class="btn btn-small btn-primary" name="commit" type="submit" value="上传新头像" />
+                                    <span class='help-block'>推荐使用正方形的透明 PNG 图片以获得最佳效果。</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class='box'>
+                        <div class='box-header'>
+                            修改密码
+                        </div>
+                        <div class='inner'>
+                            <form accept-charset="UTF-8" action="/users/update_password.htm" class="simple_form edit_user" id="edit_user_2318" method="post" novalidate="novalidate">
+                                <div style="display:none">
+                                    <input name="utf8" type="hidden" value="&#x2713;" />
+                                    <input name="_method" type="hidden" value="patch" />
+                                    <input name="authenticity_token" type="hidden" value="BSFfluchjdlKDYd4q3g+FBDYtq1X3LkaxVFAtrz0lbY=" />
+                                </div>
+                                <strong class='fade'>如果你不想更改密码，请留空以下输入框。</strong>
+                                <div class='sep5'></div>
+                                <div class="form-group password optional user_current_password">
+                                    <label class="password optional control-label" for="user_current_password">当前密码</label>
+                                    <input class="password optional form-control" id="user_current_password" name="user[current_password]" type="password" />
+                                </div>
+                                <div class="form-group password optional user_password">
+                                    <label class="password optional control-label" for="user_password">新密码</label>
+                                    <input class="password optional form-control" id="user_password" maxlength="128" name="user[password]" size="128" type="password" />
+                                </div>
+                                <div class="form-group password optional user_password_confirmation">
+                                    <label class="password optional control-label" for="user_password_confirmation">新密码确认</label>
+                                    <input class="password optional form-control" id="user_password_confirmation" name="user[password_confirmation]" type="password" />
+                                </div>
+                                <div class='form-actions'>
+                                    <input class="btn btn-small btn-primary" name="commit" type="submit" value="修改密码" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-md-4 col-lg-4 col-sm-4' id='Rightbar'>
+					
+					#if($webUser.isLogin())
+                    <div class='box'>
+                        <div class='cell'>
+                            <table>
+                                <tr>
+                                    <td valign='top' width='48'>
+                                        <a class="profile_link" href="/member/${webUser.nickname}.htm" title="${webUser.nickname}">
+                                            <img alt=" medium avatar" class="medium_avatar" src="${webUser.avatar}" />
+                                        </a>
+                                    </td>
+                                    <td valign='top' width='10'></td>
+                                    <td valign='left' width='auto'>
+                                        <div class='profile-link'>
+                                            <a class="rabel profile_link" href="/member/${webUser.nickname}.htm" title="${webUser.nickname}">${webUser.nickname}</a>
+                                        </div>
+                                        <div class='signature'></div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class='sep10'></div>
+                            <table width='100%'>
+                                <tr>
+                                    <td align='center' class='with_separator' width='34%'>
+                                        <a class="dark" href="javascript:void(0)" style="display: block;">
+                                            <span class='bigger'>0</span>
+                                            <div class='sep3'></div>
+                                            <span class='gray'>话题收藏</span>
+                                        </a>
+                                    </td>
+                                    <td align='center' width='33%'>
+                                        <a class="dark" href="javascript:void(0)" style="display: block;">
+                                            <span class='bigger'>0</span>
+                                            <div class='sep3'></div>
+                                            <span class='gray'>特别关注</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='cell'>
+                            <div class='muted'>
+                                <a class='btn btn-sm btn-info btn-block' href='/users/settings.htm#avatar'>立刻上传个性头像</a>
+                            </div>
+                        </div>
+                        <div class='inner muted'>
+                            暂无提醒
+                        </div>
+                    </div>
+					
+					#else
+					<div class="box">
+                        <div class="cell">
+                         零花钱社区 — 让论坛回归交流本质
+                        </div>
+                        <div class="inner">
+                        <div class="sep5"></div>
+                        <div class="center">
+                        <a class="btn btn-small" href="/users/sign_up.htm">现在注册</a>
+                        <div class="sep5"></div>
+                        <div class="sep10"></div>
+                        已注册用户请
+                        <a class="rabel" href="/users/sign_in.htm">登入</a>
+                        </div>
+                        </div>
+                    </div>
+					#end
+                </div>
+            </div>
+        </div>
+    </div>
+

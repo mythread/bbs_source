@@ -1,0 +1,205 @@
+
+    <div id="wrap">
+        <div class="container" id="page-main">
+            <div class="row">
+                <div class='col-md-8 col-lg-8 col-sm-8'>
+                    <div class='box'>
+                        <div class='cell'>
+                            <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                                <tr>
+                                    <td align='center' valign='top' width='73'>
+                                        <img alt="$!{user.nickname} large avatar" class="large_avatar" src="$!{user.avatar}" />
+                                    </td>
+                                    <td valign='top' width='10'></td>
+                                    <td align='left' valign='top' width='auto'>
+                                        <div class='fr'>
+                                            <div class='sep3'></div>
+                                        </div>
+                                        <h2 style='padding: 0px; margin: 0px; font-size: 22px; line-height: 22px;'>
+                                           $!{user.nickname}
+                                        </h2>
+                                        <div class='sep5'></div>
+                                        <span class='snow'>
+                                          
+                                        </span>
+                                        <div class='sep10'></div>
+                                        <table border='0' cellpadding='2' cellspacing='0' width='100%'>
+                                            <tr>
+                                                <td width='50%'>
+													#if($!{account.weiboLink} && $!{account.weiboLink.length()} > 0)
+														<span style="line-height: 16px;">
+															<img align="absmiddle" alt="Mobileme" src="/static/img/mobileme.png">&nbsp;
+															<a class="rabel" href="$!{account.weiboLink}" rel="nofollow external" target="_blank">
+																$!{account.weiboLink}
+															</a>
+														</span>
+													#end
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                 <td width='50%'>
+													#if($!{account.personalWebsite} && $!{account.personalWebsite.length()} > 0)
+														<span style="line-height: 16px;">
+															<img align="absmiddle" alt="Mobileme" src="/static/img/mobileme.png">&nbsp;
+															<a class="rabel" href="$!{account.personalWebsite}" rel="nofollow external" target="_blank">
+																$!{account.personalWebsite}
+															</a>
+														</span>
+													#end
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width='50%'>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+						<div class="inner">
+							<p>
+								#if($!{account.introduction})
+									$!{account.introduction}
+								#end
+							</p>
+						</div>
+                    </div>
+                    <div class='box'>
+                        <div class='box-header'>
+                            $!{user.nickname}
+                            最近创建的话题
+                        </div>
+						#foreach($!topic in $!lastestTopics)
+                        <div class='cell topic'>
+                            <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                                <tr>
+                                    <td valign='middle' width='auto'>
+                                        <span class='bigger'>
+                                            <a class="rabel topic" href="/topics/$!{topic.id}.htm">$!{topic.title}</a>
+                                        </span>
+                                        <div class='topic-meta'>
+                                            <a class="node" href="/nodes/$!{topic.nodeId}.htm">$!{topic.nodeName}</a>
+                                            &nbsp;&nbsp;•&nbsp;&nbsp;
+                                           $!{topic.getCreateAtText()}
+                                            &nbsp;&nbsp;•&nbsp;&nbsp;
+                                            最后回复来自
+                                            <a class="rabel profile_link" href="/member/$!{topic.lastRepliedBy}.htm" title="thrillerzw">$!{topic.lastRepliedBy}</a>
+                                        </div>
+                                    </td>
+                                    <td align='right' valign='middle' width='40'>
+                                        <div class='badge badge-info'>$!{topic.commentsCount}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+						#end
+						#**
+							<div class='inner'>
+                            <span class='chevron'>»</span>
+                            <small>
+                                <a class="rabel" href="/member/nbspjj/topics">nbspjj 创建的更多主题</a>
+                            </small>
+                         </div>
+						 *#
+                    </div>
+                    <div class='box'>
+                        <div class='box-header'>
+                            $!{user.nickname}
+                            最近的回复
+                        </div>
+						#foreach($!comment in $!lastestComments)
+                        <div class='cell comment_header muted'>
+                            <div class='pull-right timeago'>
+                                $!{comment.getCreateDateText()}
+                            </div>
+                            回复了
+                            <a class="rabel profile_link" href="/member/$!{comment.topicNickName}.htm" title="nbspjj">$!{comment.topicNickName}</a>
+                            创建的话题
+                            <span class='chevron'>›</span>
+                            <a class="rabel" href="/topics/$!{comment.topicId}.htm">$!{comment.title}</a>
+                        </div>
+                        <div class='inner'>
+                            <div class='reply_content'>
+                                #if(${comment.hasPostingDevice()})
+								@<a class="rabel" href="/member/$!{comment.postingDevice}.htm">$!{comment.postingDevice}</a>
+								#end
+                               $!{comment.content}
+                            </div>
+                        </div>
+                        <div class='sep5'></div>
+                      #end
+                    </div>
+                </div>
+                <div class='col-md-4 col-lg-4 col-sm-4' id='Rightbar'>
+				#if($webUser.isLogin())
+                    <div class='box'>
+                        <div class='cell'>
+                            <table>
+                                <tr>
+                                    <td valign='top' width='48'>
+                                        <a class="profile_link" href="/member/${webUser.nickname}.htm" title="${webUser.nickname}">
+                                            <img alt=" medium avatar" class="medium_avatar" src="${webUser.avatar}" />
+                                        </a>
+                                    </td>
+                                    <td valign='top' width='10'></td>
+                                    <td valign='left' width='auto'>
+                                        <div class='profile-link'>
+                                            <a class="rabel profile_link" href="/member/${webUser.nickname}.htm" title="${webUser.nickname}">${webUser.nickname}</a>
+                                        </div>
+                                        <div class='signature'></div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class='sep10'></div>
+                            <table width='100%'>
+                                <tr>
+                                    <td align='center' class='with_separator' width='34%'>
+                                        <a class="dark" href="javascript:void(0)" style="display: block;">
+                                            <span class='bigger'>0</span>
+                                            <div class='sep3'></div>
+                                            <span class='gray'>话题收藏</span>
+                                        </a>
+                                    </td>
+                                    <td align='center' width='33%'>
+                                        <a class="dark" href="javascript:void(0)" style="display: block;">
+                                            <span class='bigger'>0</span>
+                                            <div class='sep3'></div>
+                                            <span class='gray'>特别关注</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='cell'>
+                            <div class='muted'>
+                                <a class='btn btn-sm btn-info btn-block' href='/users/settings.htm#avatar'>立刻上传个性头像</a>
+                            </div>
+                        </div>
+                        <div class='inner muted'>
+                            暂无提醒
+                        </div>
+                    </div>
+					
+					#else
+					<div class="box">
+                        <div class="cell">
+                         零花钱社区 — 让论坛回归交流本质
+                        </div>
+                        <div class="inner">
+                        <div class="sep5"></div>
+                        <div class="center">
+                        <a class="btn btn-small" href="/users/sign_up.htm">现在注册</a>
+                        <div class="sep5"></div>
+                        <div class="sep10"></div>
+                        已注册用户请
+                        <a class="rabel" href="/users/sign_in.htm">登入</a>
+                        </div>
+                        </div>
+                    </div>
+					#end
+                </div>
+            </div>
+        </div>
+    </div>
+

@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bbs.mapper.UsersMapper" >
+  <resultMap id="BaseResultMap" type="com.bbs.model.Users" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="sign_in_count" property="signInCount" jdbcType="INTEGER" />
+    <result column="current_sign_in_at" property="currentSignInAt" jdbcType="TIMESTAMP" />
+    <result column="last_sign_in_at" property="lastSignInAt" jdbcType="TIMESTAMP" />
+    <result column="current_sign_in_ip" property="currentSignInIp" jdbcType="VARCHAR" />
+    <result column="last_sign_in_ip" property="lastSignInIp" jdbcType="VARCHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, nickname, email, password, sign_in_count, current_sign_in_at, last_sign_in_at, 
+    current_sign_in_ip, last_sign_in_ip, created_at, updated_at, avatar, type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bbs.model.UsersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="pagination != null and pagination.begin >= 0" >
+      limit #{pagination.begin}, #{pagination.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from users
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bbs.model.UsersExample" >
+    delete from users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bbs.model.Users" useGeneratedKeys="true"  keyProperty="id">
+    insert into users (id, nickname, email, 
+      password, sign_in_count, current_sign_in_at, 
+      last_sign_in_at, current_sign_in_ip, last_sign_in_ip, 
+      created_at, updated_at, avatar, 
+      type)
+    values (#{id,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{signInCount,jdbcType=INTEGER}, #{currentSignInAt,jdbcType=TIMESTAMP}, 
+      #{lastSignInAt,jdbcType=TIMESTAMP}, #{currentSignInIp,jdbcType=VARCHAR}, #{lastSignInIp,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{avatar,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bbs.model.Users" >
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="signInCount != null" >
+        sign_in_count,
+      </if>
+      <if test="currentSignInAt != null" >
+        current_sign_in_at,
+      </if>
+      <if test="lastSignInAt != null" >
+        last_sign_in_at,
+      </if>
+      <if test="currentSignInIp != null" >
+        current_sign_in_ip,
+      </if>
+      <if test="lastSignInIp != null" >
+        last_sign_in_ip,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="signInCount != null" >
+        #{signInCount,jdbcType=INTEGER},
+      </if>
+      <if test="currentSignInAt != null" >
+        #{currentSignInAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastSignInAt != null" >
+        #{lastSignInAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentSignInIp != null" >
+        #{currentSignInIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastSignInIp != null" >
+        #{lastSignInIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" resultType="java.lang.Integer" parameterType="com.bbs.model.UsersExample" >
+    select count(*) from users
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update users
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.nickname != null" >
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signInCount != null" >
+        sign_in_count = #{record.signInCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.currentSignInAt != null" >
+        current_sign_in_at = #{record.currentSignInAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastSignInAt != null" >
+        last_sign_in_at = #{record.lastSignInAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.currentSignInIp != null" >
+        current_sign_in_ip = #{record.currentSignInIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastSignInIp != null" >
+        last_sign_in_ip = #{record.lastSignInIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.avatar != null" >
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update users
+    set id = #{record.id,jdbcType=INTEGER},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      sign_in_count = #{record.signInCount,jdbcType=INTEGER},
+      current_sign_in_at = #{record.currentSignInAt,jdbcType=TIMESTAMP},
+      last_sign_in_at = #{record.lastSignInAt,jdbcType=TIMESTAMP},
+      current_sign_in_ip = #{record.currentSignInIp,jdbcType=VARCHAR},
+      last_sign_in_ip = #{record.lastSignInIp,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bbs.model.Users" >
+    update users
+    <set >
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="signInCount != null" >
+        sign_in_count = #{signInCount,jdbcType=INTEGER},
+      </if>
+      <if test="currentSignInAt != null" >
+        current_sign_in_at = #{currentSignInAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastSignInAt != null" >
+        last_sign_in_at = #{lastSignInAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentSignInIp != null" >
+        current_sign_in_ip = #{currentSignInIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastSignInIp != null" >
+        last_sign_in_ip = #{lastSignInIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="avatar != null" >
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bbs.model.Users" >
+    update users
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sign_in_count = #{signInCount,jdbcType=INTEGER},
+      current_sign_in_at = #{currentSignInAt,jdbcType=TIMESTAMP},
+      last_sign_in_at = #{lastSignInAt,jdbcType=TIMESTAMP},
+      current_sign_in_ip = #{currentSignInIp,jdbcType=VARCHAR},
+      last_sign_in_ip = #{lastSignInIp,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

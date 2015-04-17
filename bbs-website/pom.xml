@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.bbs</groupId>
+        <artifactId>bbs-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    
+    <artifactId>bbs-website</artifactId>
+    <packaging>war</packaging>
+
+    <build>
+        <finalName>bbs</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>*.properties</include>
+                </includes>
+                <filtering>true</filtering>
+                <targetPath>.</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>*.properties</exclude>
+                </excludes>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+        
+           <pluginManagement>  
+            <plugins>  
+	                <plugin> 
+	                 <artifactId>maven-compiler-plugin</artifactId>  
+	                <configuration>  
+	                    <encoding>UTF-8</encoding>  
+	                    <compilerArguments>  
+	                        <verbose />  
+	                        <bootclasspath>${java.home}/lib/rt.jar</bootclasspath>  
+	                    </compilerArguments>  
+	                </configuration>  
+	            	</plugin>  
+            </plugins>
+            </pluginManagement>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.bbs</groupId>
+            <artifactId>bbs-service</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+</project>

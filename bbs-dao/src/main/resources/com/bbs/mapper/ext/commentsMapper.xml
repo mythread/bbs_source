@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bbs.mapper.CommentsMapper" >
+ <select id="selectByTpoicId"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+       select u.nickname nickname,
+              u.avatar avatar,
+              c.id id,
+              c.created_at createdAt,
+              c.updated_at updatedAt,
+              c.content content,
+              c.user_id userId,
+              c.old_comment_id oldCommentId,
+              c.topic_id topicId,
+              c.posting_device postingDevice   
+       from comments c , users u
+       where u.id = c.user_id 
+       and c.topic_id = #{value,jdbcType=INTEGER}    
+  </select>
+   
+  <select id="count"  resultType="java.lang.Integer" parameterType="com.bbs.model.Comments">
+       select count(*) from comments c 
+		left join topics t on c.topic_id=t.id
+		left join users u on t.user_id=u.id
+		<where>
+	     <if test="userId != null and userId !=''">
+		    and c.user_id = #{userId,jdbcType=INTEGER}
+		</if>
+		</where>
+  </select>
+  
+  <select id="selectByPage"  resultMap="BaseResultMap" parameterType="com.bbs.model.Comments">
+       select c.id id,
+       		  c.created_at createAt,
+       		  c.user_id userId,
+       		  c.content content,
+       		  c.topic_id topicId,
+       		  c.posting_device postingDevice,
+       		  t.title title,
+       		  t.created_at topicCreatedAt,
+       		  t.user_id topicUserId,
+       		  u.nickname as topicNickName
+       from comments c 
+		left join topics t on c.topic_id=t.id
+		left join users u on t.user_id=u.id
+		<where>
+	     <if test="userId != null and userId !=''">
+		    and c.user_id = #{userId,jdbcType=INTEGER}
+		</if>
+		</where>
+		order by c.created_at desc 
+      <if test="pagination != null and pagination.begin >= 0" >
+		    limit #{pagination.begin}, #{pagination.length}
+		</if>
+  </select>
+</mapper>
